@@ -54,9 +54,7 @@ impl TreeElement {
             }
         }
     }
-    fn get_children(path: &String) -> Vec<TreeElement>{ // !!!!! this bullshit gotta be refactored
-        // думаю буду передавать ошибку выше
-        // и сообщать об ошибке в гуе
+    fn get_children(path: &String) -> Vec<TreeElement>{ 
         let mut children: Vec<TreeElement> = vec!();
         let children_paths = fs::read_dir(path)
             .expect("Unable to read children dirs:?");
@@ -65,10 +63,10 @@ impl TreeElement {
                 Ok( entry ) => {
                     match entry.path().to_str() {
                         Some( path_str) => { path_str.to_string() },
-                        None => panic!( "Can't convert this path to a string" ) // !!!!! DO SOMETHING HERE !!!!!
+                        None => panic!( "Can't convert this path to a string" ) 
                     }
                 },
-                Err(e) => { panic!( "Can't read entry. {e}" ) } // !!!!! AND HERE !!!!!
+                Err(e) => { panic!( "Can't read entry. {e}" ) } 
             };
             children.push(Self::new(path));
         }
